@@ -77,3 +77,4 @@ export const useSiteSettings = (): SiteSettingsContextType => {
   }
   return context;
 };
+
