@@ -1,15 +1,37 @@
 
-'use client'; // Add 'use client' as we are using hooks like useSiteSettings
+'use client'; 
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Brain, BookOpen, Search, Users } from 'lucide-react'; // Added Users, removed MapPin, InstagramIcon
+import { ArrowRight, Brain, BookOpen, Search, Users, Loader2 } from 'lucide-react'; 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSiteSettings } from '@/contexts/SiteSettingsContext'; // Import useSiteSettings
+import { useSiteSettings } from '@/contexts/SiteSettingsContext'; 
+import { useEffect, useState } from 'react';
+import type { GenerateHomepageImageOutput} from '@/ai/flows/generate-homepage-image-flow';
+import { generateHomepageImage } from '@/ai/flows/generate-homepage-image-flow';
+
 
 export default function HomePage() {
-  const { settings } = useSiteSettings(); // Get settings
+  const { settings } = useSiteSettings(); 
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
+
+  useEffect(() => {
+    async function fetchImage() {
+      setIsLoadingImage(true);
+      try {
+        const result: GenerateHomepageImageOutput = await generateHomepageImage();
+        setGeneratedImageUrl(result.imageUrl);
+      } catch (error) {
+        console.error("Failed to generate homepage image:", error);
+        setGeneratedImageUrl(null); // Fallback to placeholder if error
+      } finally {
+        setIsLoadingImage(false);
+      }
+    }
+    fetchImage();
+  }, []);
 
   return (
     <div className="space-y-12">
@@ -112,18 +134,25 @@ export default function HomePage() {
             </ul>
           </div>
           <div className="mt-6 md:mt-0">
-            <Image
-              src="https://placehold.co/600x400.png"
-              alt="Learning Journey"
-              data-ai-hint="technology education"
-              width={600}
-              height={400}
-              className="rounded-lg shadow-xl w-full h-auto"
-            />
+            {isLoadingImage ? (
+              <div className="flex flex-col items-center justify-center w-full h-[400px] bg-muted/30 rounded-lg shadow-xl animate-pulse">
+                <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+                <p className="text-muted-foreground">Generating image for your journey...</p>
+              </div>
+            ) : (
+              <Image
+                src={generatedImageUrl || "https://placehold.co/600x400.png"} 
+                alt="Learning Journey Illustration"
+                data-ai-hint="technology education digital art" 
+                width={600}
+                height={400} 
+                className="rounded-lg shadow-xl w-full h-auto object-cover"
+                unoptimized={!!generatedImageUrl} 
+              />
+            )}
           </div>
         </div>
       </section>
-      {/* "Meet Our Team" section removed from here */}
     </div>
   );
 }
