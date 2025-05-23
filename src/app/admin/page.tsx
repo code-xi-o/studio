@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center text-primary">Admin Panel Login</CardTitle>
           <CardDescription className="text-center">
-            Access the CodePath Navigator administration area.
+            Access the CODE XI administration area.
           </CardDescription>
         </CardHeader>
         <CardContent>

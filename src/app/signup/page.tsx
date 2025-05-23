@@ -54,7 +54,7 @@ export default function SignupPage() {
             <UserPlus className="h-8 w-8 mr-2"/> Create Account
           </CardTitle>
           <CardDescription className="text-center">
-            Join CodePath Navigator to save your progress and preferences.
+            Join CODE XI to save your progress and preferences.
           </CardDescription>
         </CardHeader>
         <CardContent>

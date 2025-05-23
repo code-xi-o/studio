@@ -9,7 +9,7 @@ export default function HomePage() {
     <div className="space-y-12">
       <section className="text-center py-16 rounded-xl shadow-2xl" style={{background: 'linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1))'}}>
         <h1 className="text-5xl font-extrabold tracking-tight mb-4">
-          Welcome to <span className="text-primary">CodePath Navigator</span>
+          Welcome to <span className="text-primary">CODE XI</span>
         </h1>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
           Your ultimate guide to mastering Computer Science. Explore comprehensive roadmaps, get personalized recommendations, and find the resources you need to succeed.
@@ -84,9 +84,9 @@ export default function HomePage() {
       <section className="py-12">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="text-3xl font-bold mb-4">Why CodePath Navigator?</h2>
+            <h2 className="text-3xl font-bold mb-4">Why CODE XI?</h2>
             <p className="text-muted-foreground mb-6">
-              Navigating the vast world of computer science can be daunting. CodePath Navigator simplifies this journey by providing structured learning paths and intelligent tools. Whether you're starting out or looking to specialize, we're here to help you achieve your goals.
+              Navigating the vast world of computer science can be daunting. CODE XI simplifies this journey by providing structured learning paths and intelligent tools. Whether you're starting out or looking to specialize, we're here to help you achieve your goals.
             </p>
             <ul className="space-y-2 text-muted-foreground">
               <li className="flex items-center"><ArrowRight className="h-5 w-5 text-primary mr-2" /> Comprehensive and up-to-date content.</li>

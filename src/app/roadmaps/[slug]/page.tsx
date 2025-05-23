@@ -22,7 +22,7 @@ export async function generateMetadata(
     };
   }
   return {
-    title: `${roadmap.title} | CodePath Navigator`,
+    title: `${roadmap.title} | CODE XI`,
     description: roadmap.description,
   };
 }

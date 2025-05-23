@@ -37,7 +37,7 @@ export default function LoginPage() {
             <LogIn className="h-8 w-8 mr-2"/> User Login
           </CardTitle>
           <CardDescription className="text-center">
-            Access your CodePath Navigator profile and saved progress.
+            Access your CODE XI profile and saved progress.
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -14,7 +14,7 @@ export default function AdminDashboardPage() {
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="text-3xl">Welcome, {user?.username || 'Admin'}!</CardTitle>
-          <CardDescription>This is your CodePath Navigator admin dashboard. Manage roadmaps, site settings, and more.</CardDescription>
+          <CardDescription>This is your CODE XI admin dashboard. Manage roadmaps, site settings, and more.</CardDescription>
         </CardHeader>
       </Card>
 

@@ -3,7 +3,7 @@ import { roadmaps } from '@/lib/roadmap-data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Explore Roadmaps | CodePath Navigator',
+  title: 'Explore Roadmaps | CODE XI',
   description: 'Browse comprehensive roadmaps for various Computer Science specializations.',
 };
 
