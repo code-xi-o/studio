@@ -1,3 +1,4 @@
+
 'use client';
 
 import type { PropsWithChildren } from 'react';
@@ -5,7 +6,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface SiteSettings {
   founderName: string;
+  founderLocation: string;
+  founderInstagram: string;
   coFounderName: string;
+  coFounderLocation: string;
+  coFounderInstagram: string;
   siteName: string;
 }
 
@@ -16,7 +21,11 @@ interface SiteSettingsContextType {
 
 const defaultSettings: SiteSettings = {
   founderName: 'KISHAN TIWARI',
+  founderLocation: 'Sidhi, India, 486771',
+  founderInstagram: '@justkishan',
   coFounderName: 'YUVRAJ SINGH',
+  coFounderLocation: 'Sidhi, India, 486771',
+  coFounderInstagram: '@yuvrajsingh_o6',
   siteName: 'CODE XI',
 };
 
@@ -30,7 +39,17 @@ export const SiteSettingsProvider = ({ children }: PropsWithChildren) => {
     setIsMounted(true);
     const storedSettings = localStorage.getItem('codepath_siteSettings');
     if (storedSettings) {
-      setSettings(JSON.parse(storedSettings));
+      try {
+        const parsedSettings = JSON.parse(storedSettings);
+        // Ensure all fields from defaultSettings are present, even if not in localStorage
+        // This handles cases where new settings fields are added
+        setSettings(prev => ({ ...defaultSettings, ...prev, ...parsedSettings }));
+      } catch (error) {
+        console.error("Failed to parse site settings from localStorage", error);
+        setSettings(defaultSettings); // Fallback to default if parsing fails
+      }
+    } else {
+      setSettings(defaultSettings); // Set default if nothing in localStorage
     }
   }, []);
   

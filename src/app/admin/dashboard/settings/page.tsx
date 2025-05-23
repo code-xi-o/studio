@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, type FormEvent, useEffect } from 'react';
@@ -10,20 +11,36 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function AdminSettingsPage() {
   const { settings, updateSettings } = useSiteSettings();
-  const [founderName, setFounderName] = useState(settings.founderName);
-  const [coFounderName, setCoFounderName] = useState(settings.coFounderName);
   const [siteName, setSiteName] = useState(settings.siteName);
+  const [founderName, setFounderName] = useState(settings.founderName);
+  const [founderLocation, setFounderLocation] = useState(settings.founderLocation);
+  const [founderInstagram, setFounderInstagram] = useState(settings.founderInstagram);
+  const [coFounderName, setCoFounderName] = useState(settings.coFounderName);
+  const [coFounderLocation, setCoFounderLocation] = useState(settings.coFounderLocation);
+  const [coFounderInstagram, setCoFounderInstagram] = useState(settings.coFounderInstagram);
   const { toast } = useToast();
 
   useEffect(() => {
-    setFounderName(settings.founderName);
-    setCoFounderName(settings.coFounderName);
     setSiteName(settings.siteName);
+    setFounderName(settings.founderName);
+    setFounderLocation(settings.founderLocation);
+    setFounderInstagram(settings.founderInstagram);
+    setCoFounderName(settings.coFounderName);
+    setCoFounderLocation(settings.coFounderLocation);
+    setCoFounderInstagram(settings.coFounderInstagram);
   }, [settings]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    updateSettings({ founderName, coFounderName, siteName });
+    updateSettings({ 
+      siteName,
+      founderName, 
+      founderLocation,
+      founderInstagram,
+      coFounderName,
+      coFounderLocation,
+      coFounderInstagram,
+    });
     toast({
       title: "Settings Updated",
       description: "Site settings have been successfully saved.",
@@ -51,6 +68,8 @@ export default function AdminSettingsPage() {
                 placeholder="e.g., CODE XI"
               />
             </div>
+            
+            <h3 className="text-lg font-semibold pt-4 border-t border-border">Founder Details</h3>
             <div className="space-y-2">
               <Label htmlFor="founderName">Founder Name</Label>
               <Input
@@ -62,6 +81,28 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div className="space-y-2">
+              <Label htmlFor="founderLocation">Founder Location</Label>
+              <Input
+                id="founderLocation"
+                type="text"
+                value={founderLocation}
+                onChange={(e) => setFounderLocation(e.target.value)}
+                placeholder="e.g., Sidhi, India, 486771"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="founderInstagram">Founder Instagram ID (e.g., @username)</Label>
+              <Input
+                id="founderInstagram"
+                type="text"
+                value={founderInstagram}
+                onChange={(e) => setFounderInstagram(e.target.value)}
+                placeholder="@username"
+              />
+            </div>
+
+            <h3 className="text-lg font-semibold pt-4 border-t border-border">Co-founder Details</h3>
+            <div className="space-y-2">
               <Label htmlFor="coFounderName">Co-founder Name</Label>
               <Input
                 id="coFounderName"
@@ -69,6 +110,26 @@ export default function AdminSettingsPage() {
                 value={coFounderName}
                 onChange={(e) => setCoFounderName(e.target.value)}
                 placeholder="Enter co-founder's name"
+              />
+            </div>
+             <div className="space-y-2">
+              <Label htmlFor="coFounderLocation">Co-founder Location</Label>
+              <Input
+                id="coFounderLocation"
+                type="text"
+                value={coFounderLocation}
+                onChange={(e) => setCoFounderLocation(e.target.value)}
+                placeholder="e.g., Sidhi, India, 486771"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="coFounderInstagram">Co-founder Instagram ID (e.g., @username)</Label>
+              <Input
+                id="coFounderInstagram"
+                type="text"
+                value={coFounderInstagram}
+                onChange={(e) => setCoFounderInstagram(e.target.value)}
+                placeholder="@username"
               />
             </div>
             <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground">
