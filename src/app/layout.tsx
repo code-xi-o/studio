@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'CodePath Navigator',
+  title: 'CODE XI',
   description: 'Your guide to mastering Computer Science.',
 };
 

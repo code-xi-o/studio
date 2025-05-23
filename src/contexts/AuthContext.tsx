@@ -7,9 +7,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 interface AuthContextType {
   user: User | null;
   isAdmin: boolean;
-  login: (username: string, pass: string, isAdminLogin?: boolean) => boolean; // Added isAdminLogin
+  login: (username: string, pass: string, isAdminLogin?: boolean) => boolean;
   logout: () => void;
-  signup: (username: string, pass: string) => boolean;
+  signup: (username: string, pass: string, asAdmin?: boolean) => boolean; // Updated signature
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -51,6 +51,16 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         setIsAdmin(true);
         return true;
       }
+      // Check if a signed-up admin is trying to log in
+      const existingUser = localStorage.getItem(`mock_user_${username}`);
+      if (existingUser) {
+        const parsedUser = JSON.parse(existingUser);
+        if (parsedUser.password === pass && parsedUser.isAdmin) {
+           setUser({ id: parsedUser.id, username: parsedUser.username });
+           setIsAdmin(true);
+           return true;
+        }
+      }
       return false;
     } else {
       // Mock user login
@@ -60,13 +70,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         setIsAdmin(false);
         return true;
       }
-      // Check if user exists for signup simulation
+      // Check if user exists from signup
       const existingUser = localStorage.getItem(`mock_user_${username}`);
       if (existingUser) {
         const parsedUser = JSON.parse(existingUser);
         if (parsedUser.password === pass) {
           setUser({ id: parsedUser.id, username: parsedUser.username });
-          setIsAdmin(false);
+          setIsAdmin(!!parsedUser.isAdmin); // Set admin status from stored user
           return true;
         }
       }
@@ -79,15 +89,16 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setIsAdmin(false);
   };
 
-  const signup = (username: string, pass: string): boolean => {
-    // Mock signup: check if user already exists in local storage
+  const signup = (username: string, pass: string, asAdmin: boolean = false): boolean => {
     if (localStorage.getItem(`mock_user_${username}`)) {
       return false; // User already exists
     }
-    const newUser = { id: `user_${Date.now()}`, username, password: pass }; // Store password for mock login
+    // Store password and admin status for mock login
+    const newUser = { id: `user_${Date.now()}`, username, password: pass, isAdmin: asAdmin }; 
     localStorage.setItem(`mock_user_${username}`, JSON.stringify(newUser));
+    
     setUser({ id: newUser.id, username: newUser.username });
-    setIsAdmin(false);
+    setIsAdmin(asAdmin);
     return true;
   };
 
