@@ -3,7 +3,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Brain, BookOpen, Search, MapPin, Instagram as InstagramIcon } from 'lucide-react'; // Added MapPin and InstagramIcon
+import { ArrowRight, Brain, BookOpen, Search, Users } from 'lucide-react'; // Added Users, removed MapPin, InstagramIcon
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSiteSettings } from '@/contexts/SiteSettingsContext'; // Import useSiteSettings
@@ -11,30 +11,29 @@ import { useSiteSettings } from '@/contexts/SiteSettingsContext'; // Import useS
 export default function HomePage() {
   const { settings } = useSiteSettings(); // Get settings
 
-  const formatInstagramUrl = (username?: string) => {
-    if (!username) return '#';
-    const handle = username.startsWith('@') ? username.substring(1) : username;
-    return `https://instagram.com/${handle}`;
-  };
-
   return (
     <div className="space-y-12">
       <section className="text-center py-12 md:py-16 rounded-xl shadow-2xl" style={{background: 'linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1))'}}>
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-          Welcome to <span className="text-primary">CODE XI</span>
+          Welcome to <span className="text-primary">{settings.siteName || "CODE XI"}</span>
         </h1>
         <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto px-4">
           Your ultimate guide to mastering Computer Science. Explore comprehensive roadmaps, get personalized recommendations, and find the resources you need to succeed.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4">
           <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
             <Link href="/roadmaps">
-              Explore Roadmaps <ArrowRight className="ml-2 h-5 w-5" />
+              <span>Explore Roadmaps <ArrowRight className="ml-2 h-5 w-5" /></span>
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
             <Link href="/recommendation">
-              Get Personalized Plan <Brain className="ml-2 h-5 w-5" />
+              <span>Get Personalized Plan <Brain className="ml-2 h-5 w-5" /></span>
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+            <Link href="/team">
+              <span>Meet Our Team <Users className="ml-2 h-5 w-5" /></span>
             </Link>
           </Button>
         </div>
@@ -53,7 +52,9 @@ export default function HomePage() {
           </CardHeader>
           <CardContent>
             <Button variant="link" asChild className="text-primary p-0">
-              <Link href="/roadmaps">Learn More <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              <Link href="/roadmaps">
+                <span>Learn More <ArrowRight className="ml-1 h-4 w-4" /></span>
+              </Link>
             </Button>
           </CardContent>
         </Card>
@@ -70,7 +71,9 @@ export default function HomePage() {
           </CardHeader>
           <CardContent>
             <Button variant="link" asChild className="text-primary p-0">
-              <Link href="/recommendation">Discover Your Path <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              <Link href="/recommendation">
+                <span>Discover Your Path <ArrowRight className="ml-1 h-4 w-4" /></span>
+              </Link>
             </Button>
           </CardContent>
         </Card>
@@ -87,7 +90,9 @@ export default function HomePage() {
           </CardHeader>
           <CardContent>
             <Button variant="link" asChild className="text-primary p-0">
-              <Link href="/search">Start Searching <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              <Link href="/search">
+                <span>Start Searching <ArrowRight className="ml-1 h-4 w-4" /></span>
+              </Link>
             </Button>
           </CardContent>
         </Card>
@@ -96,9 +101,9 @@ export default function HomePage() {
       <section className="py-8 md:py-12">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why CODE XI?</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why {settings.siteName || "CODE XI"}?</h2>
             <p className="text-muted-foreground mb-6">
-              Navigating the vast world of computer science can be daunting. CODE XI simplifies this journey by providing structured learning paths and intelligent tools. Whether you're starting out or looking to specialize, we're here to help you achieve your goals.
+              Navigating the vast world of computer science can be daunting. {settings.siteName || "CODE XI"} simplifies this journey by providing structured learning paths and intelligent tools. Whether you're starting out or looking to specialize, we're here to help you achieve your goals.
             </p>
             <ul className="space-y-2 text-muted-foreground">
               <li className="flex items-center"><ArrowRight className="h-5 w-5 text-primary mr-2" /> Comprehensive and up-to-date content.</li>
@@ -118,57 +123,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <section className="py-8 md:py-12 text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-8">Meet Our Team</h2>
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-          <Card className="hover:shadow-accent/20 hover:shadow-lg transition-shadow duration-300 text-left">
-            <CardHeader>
-              <CardTitle className="text-xl sm:text-2xl text-accent">Founder</CardTitle>
-              <CardDescription>{settings.founderName}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              {settings.founderLocation && (
-                <p className="flex items-center text-muted-foreground">
-                  <MapPin className="h-4 w-4 mr-2 text-primary shrink-0" />
-                  {settings.founderLocation}
-                </p>
-              )}
-              {settings.founderInstagram && (
-                <p className="flex items-center text-muted-foreground">
-                  <InstagramIcon className="h-4 w-4 mr-2 text-primary shrink-0" />
-                  <Link href={formatInstagramUrl(settings.founderInstagram)} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">
-                    {settings.founderInstagram}
-                  </Link>
-                </p>
-              )}
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-accent/20 hover:shadow-lg transition-shadow duration-300 text-left">
-            <CardHeader>
-              <CardTitle className="text-xl sm:text-2xl text-accent">Co-Founder</CardTitle>
-              <CardDescription>{settings.coFounderName}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              {settings.coFounderLocation && (
-                <p className="flex items-center text-muted-foreground">
-                  <MapPin className="h-4 w-4 mr-2 text-primary shrink-0" />
-                  {settings.coFounderLocation}
-                </p>
-              )}
-              {settings.coFounderInstagram && (
-                <p className="flex items-center text-muted-foreground">
-                  <InstagramIcon className="h-4 w-4 mr-2 text-primary shrink-0" />
-                  <Link href={formatInstagramUrl(settings.coFounderInstagram)} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">
-                    {settings.coFounderInstagram}
-                  </Link>
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      {/* "Meet Our Team" section removed from here */}
     </div>
   );
 }

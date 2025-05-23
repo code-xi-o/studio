@@ -1,10 +1,11 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useSiteSettings } from '@/contexts/SiteSettingsContext';
-import { Home, BookOpen, Search as SearchIcon, UserCircle, LogIn, LogOut, Shield, Settings, Brain } from 'lucide-react';
+import { Home, BookOpen, Search as SearchIcon, UserCircle, LogIn, LogOut, Shield, Brain, Users } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
@@ -23,32 +24,49 @@ export default function Header() {
         <Link href="/" className="text-2xl sm:text-3xl font-bold text-primary">
           {settings.siteName || "CODE XI"}
         </Link>
-        <nav className="flex items-center space-x-1 sm:space-x-2 md:space-x-4">
+        <nav className="flex items-center space-x-1 sm:space-x-2 md:space-x-3">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/" className="flex items-center gap-1 sm:gap-2">
-              <Home size={18} /> <span className="hidden sm:inline">Home</span>
+            <Link href="/">
+              <span className="flex items-center gap-1 sm:gap-2">
+                <Home size={18} /> <span className="hidden sm:inline">Home</span>
+              </span>
             </Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/roadmaps" className="flex items-center gap-1 sm:gap-2">
-              <BookOpen size={18} /> <span className="hidden sm:inline">Roadmaps</span>
+            <Link href="/roadmaps">
+              <span className="flex items-center gap-1 sm:gap-2">
+                <BookOpen size={18} /> <span className="hidden sm:inline">Roadmaps</span>
+              </span>
             </Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/search" className="flex items-center gap-1 sm:gap-2">
-              <SearchIcon size={18} /> <span className="hidden sm:inline">Search</span>
+            <Link href="/search">
+              <span className="flex items-center gap-1 sm:gap-2">
+                <SearchIcon size={18} /> <span className="hidden sm:inline">Search</span>
+              </span>
             </Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/recommendation" className="flex items-center gap-1 sm:gap-2">
-               <Brain size={18} /> <span className="hidden sm:inline">Recommend</span>
+            <Link href="/recommendation">
+              <span className="flex items-center gap-1 sm:gap-2">
+                 <Brain size={18} /> <span className="hidden sm:inline">Recommend</span>
+              </span>
+            </Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/team">
+              <span className="flex items-center gap-1 sm:gap-2">
+                 <Users size={18} /> <span className="hidden sm:inline">Team</span>
+              </span>
             </Link>
           </Button>
 
           {isAdmin && (
             <Button variant="ghost" size="sm" asChild>
-              <Link href="/admin/dashboard" className="flex items-center gap-1 sm:gap-2">
-                <Shield size={18} /> <span className="hidden sm:inline">Admin</span>
+              <Link href="/admin/dashboard">
+                <span className="flex items-center gap-1 sm:gap-2">
+                  <Shield size={18} /> <span className="hidden sm:inline">Admin</span>
+                </span>
               </Link>
             </Button>
           )}
@@ -56,8 +74,10 @@ export default function Header() {
           {user ? (
             <>
               <Button variant="ghost" size="sm" asChild>
-                <Link href="/profile" className="flex items-center gap-1 sm:gap-2">
-                  <UserCircle size={18} /> <span className="hidden sm:inline">Profile</span>
+                <Link href="/profile">
+                  <span className="flex items-center gap-1 sm:gap-2">
+                    <UserCircle size={18} /> <span className="hidden sm:inline">Profile</span>
+                  </span>
                 </Link>
               </Button>
               <Button variant="ghost" size="sm" onClick={handleLogout} className="flex items-center gap-1 sm:gap-2">
@@ -66,8 +86,10 @@ export default function Header() {
             </>
           ) : (
             <Button variant="ghost" size="sm" asChild>
-              <Link href="/login" className="flex items-center gap-1 sm:gap-2">
-                <LogIn size={18} /> <span className="hidden sm:inline">Login</span>
+              <Link href="/login">
+                <span className="flex items-center gap-1 sm:gap-2">
+                  <LogIn size={18} /> <span className="hidden sm:inline">Login</span>
+                </span>
               </Link>
             </Button>
           )}
