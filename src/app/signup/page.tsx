@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, type FormEvent } from 'react';
@@ -9,14 +10,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Switch } from "@/components/ui/switch"; // Added Switch import
-import { UserPlus, Terminal, ShieldCheck } from "lucide-react";
+import { UserPlus, Terminal } from "lucide-react"; // Removed ShieldCheck
 
 export default function SignupPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isAdminSignup, setIsAdminSignup] = useState(false); // State for admin toggle
+  // Removed isAdminSignup state
   const [error, setError] = useState('');
   const { signup } = useAuth();
   const router = useRouter();
@@ -32,15 +32,10 @@ export default function SignupPage() {
       setError('Password must be at least 6 characters long.');
       return;
     }
-    // Pass isAdminSignup to the signup function
-    const success = signup(username, password, isAdminSignup); 
+    // Call signup without isAdminSignup, it will default to false
+    const success = signup(username, password); 
     if (success) {
-      // If signed up as admin, redirect to admin dashboard, otherwise to profile
-      if (isAdminSignup) {
-        router.push('/admin/dashboard');
-      } else {
-        router.push('/profile');
-      }
+      router.push('/profile'); // Regular users go to profile
     } else {
       setError('Username already taken or signup failed. Please try a different username.');
     }
@@ -101,18 +96,7 @@ export default function SignupPage() {
                 required
               />
             </div>
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="admin-signup"
-                checked={isAdminSignup}
-                onCheckedChange={setIsAdminSignup}
-                aria-label="Sign up as admin"
-              />
-              <Label htmlFor="admin-signup" className="flex items-center">
-                <ShieldCheck className="h-4 w-4 mr-2 text-muted-foreground" />
-                Sign up as Administrator
-              </Label>
-            </div>
+            {/* Removed Admin Signup Switch */}
             <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
               Sign Up
             </Button>
