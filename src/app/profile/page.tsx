@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { UserCircle, Settings, Shield, Loader2, LogOut } from 'lucide-react';
+import { UserCircle, Settings, Shield, Loader2, LogOut, UserCog } from 'lucide-react'; // Added UserCog
 import { Progress } from "@/components/ui/progress";
-import Image from 'next/image';
+// Removed Image import as it's no longer used on this page
+// import Image from 'next/image'; 
 
 export default function ProfilePage() {
   const { user, isAdmin, logout } = useAuth();
@@ -55,14 +56,9 @@ export default function ProfilePage() {
     <div className="space-y-8">
       <Card className="shadow-xl overflow-hidden">
         <div className="bg-gradient-to-r from-primary/30 to-accent/30 p-8 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <Image 
-            src={`https://placehold.co/120x120.png`}
-            alt="User Avatar"
-            data-ai-hint="profile avatar"
-            width={120}
-            height={120}
-            className="rounded-full border-4 border-background shadow-lg"
-          />
+          <div className="rounded-full border-4 border-background shadow-lg bg-muted flex items-center justify-center h-32 w-32">
+            <UserCog className="h-20 w-20 text-foreground/70" aria-label="Profile model icon" />
+          </div>
           <div>
             <CardTitle className="text-4xl font-bold text-foreground">Welcome, {user.username}!</CardTitle>
             <CardDescription className="text-lg text-foreground/80">
@@ -144,5 +140,5 @@ export default function ProfilePage() {
     </div>
   );
 }
-// Need to import useState
-import { useState } from 'react';
+// Need to import useState - (This comment was pre-existing, useState is already imported)
+// import { useState } from 'react'; // This line can be removed if not needed for other reasons, or kept if there's a style guide preference. It's already imported at the top.
