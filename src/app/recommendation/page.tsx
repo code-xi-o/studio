@@ -35,17 +35,17 @@ export default function RecommendationPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <section className="text-center">
-        <h1 className="text-4xl font-bold mb-2">Personalized Roadmap Recommendation</h1>
-        <p className="text-lg text-muted-foreground">
+    <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 px-4">
+      <section className="text-center pt-4">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Personalized Roadmap Recommendation</h1>
+        <p className="text-base sm:text-lg text-muted-foreground">
           Let our AI guide you! Tell us your skills and interests, and we'll suggest a learning path.
         </p>
       </section>
 
       <Card className="shadow-xl">
         <CardHeader>
-          <CardTitle className="flex items-center"><Wand2 className="h-6 w-6 mr-2 text-primary"/> Your Learning Profile</CardTitle>
+          <CardTitle className="flex items-center text-xl sm:text-2xl"><Wand2 className="h-5 w-5 sm:h-6 sm:w-6 mr-2 text-primary"/> Your Learning Profile</CardTitle>
           <CardDescription>Provide your current skills and interests to get a tailored roadmap.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -85,7 +85,7 @@ export default function RecommendationPage() {
       </Card>
 
       {error && (
-        <Alert variant="destructive">
+        <Alert variant="destructive" className="mt-6">
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -94,14 +94,14 @@ export default function RecommendationPage() {
       {recommendation && (
         <Card className="mt-8 shadow-xl bg-card/70">
           <CardHeader>
-            <CardTitle className="text-primary">Your Personalized Roadmap</CardTitle>
+            <CardTitle className="text-primary text-xl sm:text-2xl">Your Personalized Roadmap</CardTitle>
           </CardHeader>
           <CardContent>
             <Textarea
               readOnly
               value={recommendation.roadmap}
-              className="min-h-[200px] bg-muted/50 text-foreground"
-              rows={10}
+              className="min-h-[150px] sm:min-h-[200px] bg-muted/50 text-foreground"
+              rows={8}
             />
           </CardContent>
         </Card>

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Search as SearchIcon, ExternalLink } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { roadmaps } from '@/lib/roadmap-data'; // To populate roadmap select
+import { roadmaps } from '@/lib/roadmap-data'; 
 import Link from 'next/link';
 
 export default function IntelligentSearchPage() {
@@ -42,17 +42,17 @@ export default function IntelligentSearchPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8">
-      <section className="text-center">
-        <h1 className="text-4xl font-bold mb-2">Intelligent Resource Search</h1>
-        <p className="text-lg text-muted-foreground">
+    <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8 px-4">
+      <section className="text-center pt-4">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Intelligent Resource Search</h1>
+        <p className="text-base sm:text-lg text-muted-foreground">
           Find specific resources within our roadmaps using AI-powered search.
         </p>
       </section>
 
       <Card className="shadow-xl">
         <CardHeader>
-          <CardTitle className="flex items-center"><SearchIcon className="h-6 w-6 mr-2 text-primary"/> Search Parameters</CardTitle>
+          <CardTitle className="flex items-center text-xl sm:text-2xl"><SearchIcon className="h-5 w-5 sm:h-6 sm:w-6 mr-2 text-primary"/> Search Parameters</CardTitle>
           <CardDescription>Enter your query and select a roadmap to search within.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -63,14 +63,14 @@ export default function IntelligentSearchPage() {
                 id="query"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="e.g., 'Introduction to Neural Networks in Python'"
+                placeholder="e.g., 'Intro to Neural Networks in Python'"
                 required
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="roadmap">Roadmap</Label>
               <Select onValueChange={setSelectedRoadmap} value={selectedRoadmap}>
-                <SelectTrigger id="roadmap">
+                <SelectTrigger id="roadmap" className="w-full">
                   <SelectValue placeholder="Select a roadmap" />
                 </SelectTrigger>
                 <SelectContent>
@@ -106,20 +106,20 @@ export default function IntelligentSearchPage() {
       {results && (
         <Card className="mt-8 shadow-xl bg-card/70">
           <CardHeader>
-            <CardTitle className="text-primary">Search Results</CardTitle>
+            <CardTitle className="text-primary text-xl sm:text-2xl">Search Results</CardTitle>
             <CardDescription>{results.length > 0 ? `Found ${results.length} relevant resources.` : "No resources found matching your query."}</CardDescription>
           </CardHeader>
           <CardContent>
             {results.length > 0 ? (
               <ul className="space-y-4">
                 {results.map((result, index) => (
-                  <li key={index} className="p-4 border border-border rounded-md hover:bg-muted/50 transition-colors">
-                    <Link href={result.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-lg text-foreground hover:text-primary flex justify-between items-center group">
+                  <li key={index} className="p-3 sm:p-4 border border-border rounded-md hover:bg-muted/50 transition-colors">
+                    <Link href={result.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-base sm:text-lg text-foreground hover:text-primary flex justify-between items-center group">
                       {result.title}
-                      <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                     </Link>
                     <p className="text-sm text-muted-foreground mt-1">{result.description}</p>
-                    <Link href={result.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline mt-1 block">
+                    <Link href={result.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline mt-1 block break-all">
                       {result.url}
                     </Link>
                   </li>

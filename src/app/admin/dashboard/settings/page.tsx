@@ -50,10 +50,10 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Site Settings</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold">Site Settings</h1>
       <Card className="max-w-2xl shadow-lg">
         <CardHeader>
-          <CardTitle>Customize Your Site</CardTitle>
+          <CardTitle className="text-xl sm:text-2xl">Customize Your Site</CardTitle>
           <CardDescription>Update general information about your website.</CardDescription>
         </CardHeader>
         <CardContent>

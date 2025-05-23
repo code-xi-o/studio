@@ -1,7 +1,7 @@
 'use client';
 
 import type { PropsWithChildren} from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'; // Moved useState import to the top
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import AdminSidebar from '@/components/admin/AdminSidebar';
@@ -13,22 +13,21 @@ export default function AdminDashboardLayout({ children }: PropsWithChildren) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Give AuthContext time to load from localStorage
     const timer = setTimeout(() => {
       if (!user || !isAdmin) {
         router.replace('/admin');
       }
       setIsLoading(false);
-    }, 100); // Adjust delay if needed, or use a more robust loading state from AuthContext
+    }, 100); 
 
     return () => clearTimeout(timer);
   }, [user, isAdmin, router]);
 
   if (isLoading || !user || !isAdmin) {
     return (
-      <div className="flex items-center justify-center h-screen bg-background">
-        <Loader2 className="h-12 w-12 animate-spin text-primary" />
-        <p className="ml-4 text-xl">Loading Admin Area...</p>
+      <div className="flex items-center justify-center h-screen bg-background p-4">
+        <Loader2 className="h-10 w-10 sm:h-12 sm:w-12 animate-spin text-primary" />
+        <p className="ml-3 sm:ml-4 text-lg sm:text-xl">Loading Admin Area...</p>
       </div>
     );
   }
@@ -36,12 +35,9 @@ export default function AdminDashboardLayout({ children }: PropsWithChildren) {
   return (
     <div className="flex h-screen bg-background">
       <AdminSidebar />
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-auto">
         {children}
       </main>
     </div>
   );
 }
-
-// Need to import useState
-import { useState } from 'react';

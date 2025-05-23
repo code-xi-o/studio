@@ -10,19 +10,19 @@ export default function AdminDashboardPage() {
   const { user } = useAuth();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="text-3xl">Welcome, {user?.username || 'Admin'}!</CardTitle>
-          <CardDescription>This is your CODE XI admin dashboard. Manage roadmaps, site settings, and more.</CardDescription>
+          <CardTitle className="text-2xl sm:text-3xl">Welcome, {user?.username || 'Admin'}!</CardTitle>
+          <CardDescription className="text-base sm:text-lg">This is your CODE XI admin dashboard. Manage roadmaps, site settings, and more.</CardDescription>
         </CardHeader>
       </Card>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card className="hover:shadow-primary/20 hover:shadow-lg transition-shadow">
           <CardHeader>
-            <Workflow className="h-10 w-10 text-primary mb-3" />
-            <CardTitle>Manage Roadmaps</CardTitle>
+            <Workflow className="h-8 w-8 sm:h-10 sm:w-10 text-primary mb-3" />
+            <CardTitle className="text-xl sm:text-2xl">Manage Roadmaps</CardTitle>
             <CardDescription>View, edit, or add new learning roadmaps.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -34,8 +34,8 @@ export default function AdminDashboardPage() {
 
         <Card className="hover:shadow-primary/20 hover:shadow-lg transition-shadow">
           <CardHeader>
-            <Settings className="h-10 w-10 text-primary mb-3" />
-            <CardTitle>Site Settings</CardTitle>
+            <Settings className="h-8 w-8 sm:h-10 sm:w-10 text-primary mb-3" />
+            <CardTitle className="text-xl sm:text-2xl">Site Settings</CardTitle>
             <CardDescription>Customize site name, founder details, etc.</CardDescription>
           </CardHeader>
           <CardContent>

@@ -30,10 +30,10 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)]">
+    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] px-4">
       <Card className="w-full max-w-md shadow-2xl">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center text-primary">Admin Panel Login</CardTitle>
+          <CardTitle className="text-2xl sm:text-3xl font-bold text-center text-primary">Admin Panel Login</CardTitle>
           <CardDescription className="text-center">
             Access the CODE XI administration area.
           </CardDescription>
@@ -76,8 +76,8 @@ export default function AdminLoginPage() {
             </Button>
           </form>
         </CardContent>
-         <CardFooter className="text-xs text-center text-muted-foreground">
-          {/* <p>Default credentials: username - kishan, password - kishan2314</p> */}
+         <CardFooter className="text-xs text-center text-muted-foreground pt-4">
+         
         </CardFooter>
       </Card>
     </div>
