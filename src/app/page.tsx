@@ -1,10 +1,22 @@
+
+'use client'; // Add 'use client' as we are using hooks like useSiteSettings
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Brain, BookOpen, Search } from 'lucide-react';
+import { ArrowRight, Brain, BookOpen, Search, MapPin, Instagram as InstagramIcon } from 'lucide-react'; // Added MapPin and InstagramIcon
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSiteSettings } from '@/contexts/SiteSettingsContext'; // Import useSiteSettings
 
 export default function HomePage() {
+  const { settings } = useSiteSettings(); // Get settings
+
+  const formatInstagramUrl = (username?: string) => {
+    if (!username) return '#';
+    const handle = username.startsWith('@') ? username.substring(1) : username;
+    return `https://instagram.com/${handle}`;
+  };
+
   return (
     <div className="space-y-12">
       <section className="text-center py-12 md:py-16 rounded-xl shadow-2xl" style={{background: 'linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1))'}}>
@@ -104,6 +116,57 @@ export default function HomePage() {
               className="rounded-lg shadow-xl w-full h-auto"
             />
           </div>
+        </div>
+      </section>
+
+      <section className="py-8 md:py-12 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-8">Meet Our Team</h2>
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+          <Card className="hover:shadow-accent/20 hover:shadow-lg transition-shadow duration-300 text-left">
+            <CardHeader>
+              <CardTitle className="text-xl sm:text-2xl text-accent">Founder</CardTitle>
+              <CardDescription>{settings.founderName}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm">
+              {settings.founderLocation && (
+                <p className="flex items-center text-muted-foreground">
+                  <MapPin className="h-4 w-4 mr-2 text-primary shrink-0" />
+                  {settings.founderLocation}
+                </p>
+              )}
+              {settings.founderInstagram && (
+                <p className="flex items-center text-muted-foreground">
+                  <InstagramIcon className="h-4 w-4 mr-2 text-primary shrink-0" />
+                  <Link href={formatInstagramUrl(settings.founderInstagram)} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">
+                    {settings.founderInstagram}
+                  </Link>
+                </p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-accent/20 hover:shadow-lg transition-shadow duration-300 text-left">
+            <CardHeader>
+              <CardTitle className="text-xl sm:text-2xl text-accent">Co-Founder</CardTitle>
+              <CardDescription>{settings.coFounderName}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm">
+              {settings.coFounderLocation && (
+                <p className="flex items-center text-muted-foreground">
+                  <MapPin className="h-4 w-4 mr-2 text-primary shrink-0" />
+                  {settings.coFounderLocation}
+                </p>
+              )}
+              {settings.coFounderInstagram && (
+                <p className="flex items-center text-muted-foreground">
+                  <InstagramIcon className="h-4 w-4 mr-2 text-primary shrink-0" />
+                  <Link href={formatInstagramUrl(settings.coFounderInstagram)} target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">
+                    {settings.coFounderInstagram}
+                  </Link>
+                </p>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </section>
     </div>
