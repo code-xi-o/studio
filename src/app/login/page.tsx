@@ -122,7 +122,7 @@ export default function LoginPage() {
               <Link href="/signup">Sign up</Link>
             </Button>
           </p>
-           <p className="text-xs text-center text-muted-foreground">Default admin: kishan / kishan2314 (toggle admin login)</p>
+           {/* <p className="text-xs text-center text-muted-foreground">Default admin: kishan / kishan2314 (toggle admin login)</p> */}
            <p className="text-xs text-center text-muted-foreground">Mock user: testuser / password</p>
         </CardFooter>
       </Card>

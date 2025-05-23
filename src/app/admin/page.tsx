@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, type FormEvent } from 'react';
@@ -76,7 +77,7 @@ export default function AdminLoginPage() {
           </form>
         </CardContent>
          <CardFooter className="text-xs text-center text-muted-foreground">
-          <p>Default credentials: username - kishan, password - kishan2314</p>
+          {/* <p>Default credentials: username - kishan, password - kishan2314</p> */}
         </CardFooter>
       </Card>
     </div>
