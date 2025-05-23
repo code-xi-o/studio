@@ -22,7 +22,7 @@ interface SiteSettingsContextType {
 const defaultSettings: SiteSettings = {
   founderName: 'KISHAN TIWARI',
   founderLocation: 'Sidhi, India, 486771',
-  founderInstagram: '@justkishan',
+  founderInstagram: '@justkishan_',
   coFounderName: 'YUVRAJ SINGH',
   coFounderLocation: 'Sidhi, India, 486771',
   coFounderInstagram: '@yuvrajsingh_o6',
